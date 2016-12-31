@@ -13,7 +13,7 @@ public class Solution {
             return true;
         }
         
-        int left = depth(root.left);
+        int left = depth(root.left);              // 为什么把depth(root.left) 直接换进去会出错
         int right = depth(root.right);  
         if (Math.abs(left - right) > 1) return false; 
         
