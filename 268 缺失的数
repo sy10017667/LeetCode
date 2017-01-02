@@ -1,0 +1,18 @@
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        int sum = 0;
+        for(int i: nums){
+            sum += i;
+        }
+        
+        return n*(n+1)/2-sum;
+        
+    }
+}本来想先排序 然后从第i个数遍历数组，如果第i个数 减去 第i-1个数的差为2的话 就返回nums[i]-1; 但是输入只有[0]和[1]的时候就不好办了
+所以求和，然后用等差数列的求和公式计算
+
+(an+a1)*项数/2
+完整的数列应该是[0,1,2,3..n]an=n，共n+1项
+这里的a1是0， nums的长度是n
+所以公式变成 (n+0)*(n+1)/2 然后减去输入数组所有项的和就可以了。
