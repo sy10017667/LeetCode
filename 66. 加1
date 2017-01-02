@@ -1,0 +1,22 @@
+Given a non-negative number represented as an array of digits, plus one to the number.
+The digits are stored such that the most significant digit is at the head of the list.
+一共分为3种情况
+1. 最后一位是0~8之间的数，直接加上1就可以了
+2. 最后1位或几位是9但是 99之前有0~8之间的数， 这样就从后往前找到第一个不为9的数加上1，把之后连续的9全部改成0 
+3. 全部是9不管多少位，这个需要重新建立一个长度为nums.length+1的数组，把第一位赋值为1，之后的为0.
+
+#Carrier!忘了是怎么回事了
+
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        int carrier = 1;
+        if(digits.length == 0 || digits == null ){
+        return digits;
+        }
+        
+        
+        
+        
+        
+    }
+}
