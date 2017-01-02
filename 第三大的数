@@ -1,0 +1,71 @@
+改了半天气死我了
+public class Solution {
+    public int thirdMax(int[] nums) {
+        if(nums.length < 1 || nums == null) return 0;
+        if(nums.length == 1) return nums[0];
+        
+        long max = Integer.MIN_VALUE;
+        long mid = Integer.MIN_VALUE;
+        long min = Integer.MIN_VALUE;
+        int count = 0;
+        for(int i:nums){
+            if(i >= max){
+                if(i == max) continue;
+                min = mid;   //       i, max, mid -> min
+                mid = max;     //       i, max->mid,   min 
+                max = i;        //      i->max, mid,   min
+                count++;
+            }else if(i >= mid){
+                if(i == mid) continue;
+                min = mid;        // mid->min
+                mid = i;            // i->mid
+                count++;
+            }else if(i >= min){
+                if(i==min) continue;
+                min = i;
+                count++;
+            }
+        }
+        System.out.println(count);
+        if(count < 3){
+            return (int) max;
+        }
+        return (int) min;
+    }
+}
+
+[1,2,-2147483648]此题目已经给我弄崩溃
+public class Solution {
+    public int thirdMax(int[] nums) {
+        if(nums.length < 1 || nums == null) return 0;
+        if(nums.length == 1) return nums[0];
+        
+        long max = Integer.MIN_VALUE;
+        long mid = Integer.MIN_VALUE;
+        long min = Integer.MIN_VALUE;
+        int count = 0;
+        for(int i:nums){
+            if(i >= max){
+                if(i == max) continue;
+                min = mid;   //       i, max, mid -> min
+                mid = max;     //       i, max->mid,   min 
+                max = i;        //      i->max, mid,   min
+                count++;
+            }else if(i >= mid){
+                if(i == mid) continue;
+                min = mid;        // mid->min
+                mid = i;            // i->mid
+                count++;
+            }else if(i >= min){
+//                if(i==min) continue;
+                min = i;
+                count++;
+            }
+        }
+        System.out.println(count);
+        if(count < 3){
+            return (int) max;
+        }
+        return (int) min;
+    }
+}
