@@ -56,3 +56,19 @@ public class Solution {
         return res;
     }
 }
+AC代码：
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        //build hashset for nums1
+        HashSet<Integer> set = new HashSet<Integer>();
+        for(int i:nums1) set.add(i);
+        //build hashset for result
+        HashSet<Integer> res = new HashSet<Integer>();
+        for(int j:nums2) if(set.contains(j)) res.add(j);
+        // convert hash set to integer Array.
+        int[] ret = new int[res.size()];
+        int i = 0;
+        for(int k:res) ret[i++] = k;
+        return ret;
+    }
+}
