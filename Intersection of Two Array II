@@ -1,0 +1,22 @@
+public class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        //Build ArrayList for nums1
+        ArrayList<Integer> n1 = new ArrayList<Integer>();
+        for(int i:nums1) n1.add(i);
+        // build ArrayList for result
+        
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(int j:nums2){
+            if (n1.contains(j)){
+                res.add(j);
+                n1.remove((Integer) j); // 如果只是写 n1.remove(j)  Arraly.remove(index j) will be called.
+            }
+        }
+        // convert ArrayList to Integer Array
+        int[] ret = new int[res.size()];
+        int l = 0;
+        for(int k: res) ret[l++] = k;
+        return ret;
+        
+    }
+}
