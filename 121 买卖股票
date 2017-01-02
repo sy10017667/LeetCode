@@ -1,0 +1,13 @@
+动态规划解法 不断更新最小值和最大收益
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices ==null || prices.length<2) return 0;
+        int min = prices[0];
+        int profit = 0;
+        for(int i :prices){
+            min = Math.min(min,i);
+            profit = Math.max(i-min,profit);
+        }
+        return profit;
+    }
+}
