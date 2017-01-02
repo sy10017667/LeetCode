@@ -1,0 +1,21 @@
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        //build HashMap for nums
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int[] res = new int[2];
+
+        for(int i = 0; i< nums.length; i++){
+            if (map.containsKey(target - nums[i])){
+                res[0] = map.get(target - nums[i]);
+                res[1] = i;
+            }else{
+                map.put(nums[i],i);
+            }
+
+        }
+        return res;
+        
+    }
+}
+
+// HashMap很难 从Value得到Key值， 所以次题中，我们把nums[i]设置成Key值 so that我们找到 target-当前数的时候，我们可以找到当前数所需要的另一半的index。
