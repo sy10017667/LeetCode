@@ -1,0 +1,7 @@
+
+public class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}我觉得这题好奇怪 只是删除了当前节点就过了。我还以为得判定啥的呢
