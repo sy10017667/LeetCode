@@ -1,0 +1,20 @@
+public List<List<Integer>> subsets(int[] nums) {  //返回二维数组
+    List<List<Integer>> list = new ArrayList<>(); //建造二维数组
+    Arrays.sort(nums);					//  对输入排序
+    backtrack(list, new ArrayList<>(), nums, 0);  // 调用递归函数，4个参数，第一个是 最终要返回的二维数组，第二个是每次需要添加到最终结果的新数组
+    
+    第三个是输入，第四个0不知道是干嘛的。
+    return list;						 // 主函数返回结果	
+}
+
+private void backtrack(List<List<Integer>> list , List<Integer> tempList, int [] nums, int start){ 4个输入分别是，最终返回的二维数组，
+
+    list.add(new ArrayList<>(tempList));  //   把那个临时的tempList 加入到最终结果中
+    for(int i = start; i < nums.length; i++){  // 从start 开始，遍历原输入数组
+        tempList.add(nums[i]);                把数组当前的值加入临时数组中
+        backtrack(list, tempList, nums, i + 1);  //递归调用 // 从第i加1开始
+        tempList.remove(tempList.size() - 1); // 把 临时数组中的最后一项删除掉，不知道为什么么
+    }
+}
+
+来跑一个case啊
