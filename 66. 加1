@@ -6,17 +6,26 @@ The digits are stored such that the most significant digit is at the head of the
 3. 全部是9不管多少位，这个需要重新建立一个长度为nums.length+1的数组，把第一位赋值为1，之后的为0.
 
 #Carrier!忘了是怎么回事了
-
+我又想起来了，代码如下
 public class Solution {
     public int[] plusOne(int[] digits) {
-        int carrier = 1;
-        if(digits.length == 0 || digits == null ){
-        return digits;
+        //[1,2,9]
+        
+        int carieer = 1;
+        for(int i = digits.length-1; i >= 0; i--){
+            if(digits[i] < 9){
+                digits[i] += carieer;
+                carieer = 0;
+            }else if(digits[i] == 9 && carieer == 1){
+                digits[i] = 0;
+            }
         }
         
-        
-        
-        
-        
+        if (carieer == 1){
+            int[] res = new int[digits.length+1];
+            res[0] = 1;
+            return res;
+        }
+        return digits;
     }
 }
