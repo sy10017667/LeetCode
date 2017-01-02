@@ -1,0 +1,58 @@
+1. buggy code. 用的冒泡排序和二分搜索
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        if(nums1.length == 0 || nums2.length == 0){
+            int [] res = new int[0];
+            return res;
+        }
+        int[] sortednums1 = BBsort(nums1);
+        for (int i: nums2){
+            int location = BSearch(sortednums1,i);
+            if(location != -1){
+                set.add(sortednums1[location]);
+            }
+        }
+        
+        /// 返回结果
+        int [] res = new int[set.size()];
+        for(int i: set){
+            int j = 0;
+            res[j++] = i;
+        }
+        return res;
+    }
+    
+    
+    
+    private int[] BBsort(int[] nums){
+        int len = nums.length;
+        for(int i=0; i<len;i++){
+            for(int j=1; j<len;j++){
+                if(nums[j] < nums[j-1]){
+                int temp = nums[j];
+                nums[j] = nums[j-1];
+                nums[j-1] = temp; 
+            }
+        }
+    }
+        return nums;
+}
+    private int BSearch(int[] nums, int target){
+        int l = 0, r = nums.length;
+        while(l + 1 < r){
+            int mid = l + (r-l)/2;
+            if (nums[mid] == target){
+                return mid;
+            } else if (nums[mid] < target){
+                l = mid;
+            }else{
+                r = mid;
+            }
+        }
+        int res = -1;
+        if(nums[l] == target) res = l;
+        if(nums[r] == target) res = r;
+        return res;
+    }
+}
