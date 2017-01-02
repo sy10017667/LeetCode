@@ -1,0 +1,18 @@
+最开始的想法是建立一个ArrayList然后遍历arrayList遇见一个零就counter++ 把它删除然后在counter--把零加到后面这样是O(n+m)时间O(n)空间
+
+直接给000们换后面去。不行，顺序会乱
+应该把非零的数换到前面来 
+代码：
+public class Solution {
+    public void moveZeroes(int[] nums) {
+        int j = 0;
+        for (int i = 0; i < nums.length; i++){
+            if(nums[i] != 0){
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                j++;
+            }
+        }
+    }
+}
