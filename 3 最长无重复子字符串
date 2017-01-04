@@ -1,0 +1,27 @@
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        // abc abc bb
+        HashSet<Character> set = new HashSet<Character>();
+        int res = 0;
+        int start = 0;
+        for(int end =0; end < s.length(); end++){
+            if(!set.contains(s.charAt(end))){
+                set.add(s.charAt(end));
+                res = Math.max(res,set.size());
+            }else{
+                set.remove(s.charAt(start));
+                start++;
+                end--;
+            }
+        }
+        return res;
+    }
+}思路是建造一个hashset，这个hashset就是当前 substring里面的无重复字符，然后设置一个res是当前最大长度。
+然后设置两个指针，遍历字符串，如果end的字符串不在hashset里面，当前无重复子字符串长度加1
+如果end字符在hashset里面，表示之前有重复的字符，我们就从start开始删除字符，直到把当前end的字符删去位置
+
+   a b a b c
+       s
+           e
+set=[a,b,c]
+res = 3
