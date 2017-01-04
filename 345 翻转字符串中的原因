@@ -1,0 +1,34 @@
+public class Solution {
+    public String reverseVowels(String s) {
+        if(s == null || s.length() == 0) return s;
+        int left = 0;
+        int right = s.length() - 1; //这个地方一定要减一不然会跑出out of bount的异常在第二三行的引用charAt(right)的时候。
+        List<Character> vowels = new ArrayList<>();
+        StringBuilder res = new StringBuilder(s);
+        vowels.add('A');
+        vowels.add('E');
+        vowels.add('I');
+        vowels.add('O');
+        vowels.add('U');
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('i');
+        vowels.add('o');
+        vowels.add('u');
+        
+        while(left < right){
+            while(!vowels.contains(s.charAt(left)) && left < right){
+                left++;
+            }
+            while(!vowels.contains(s.charAt(right)) && left < right){
+                right--;
+            }
+            char temp = res.charAt(left);
+            res.setCharAt(left, res.charAt(right));
+            res.setCharAt(right,temp);
+            left++;
+            right--;
+    }
+    return res.toString();
+    }
+}
