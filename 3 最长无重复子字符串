@@ -11,7 +11,7 @@ public class Solution {
             }else{
                 set.remove(s.charAt(start));
                 start++;
-                end--;
+                end--;  //这句很重要，目的是为了如果当前字符存在的话，我们需要在删除start字符后再次判定end字符
             }
         }
         return res;
