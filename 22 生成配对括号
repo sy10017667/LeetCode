@@ -1,0 +1,55 @@
+public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<String>();
+        backtrack(list, "", 0, 0, n);
+        return list;
+    }
+
+
+1 list = [] str = “” open = 0, close = 0 n = 3
+2 str.length()==0, != 6
+5 0 < 3
+6 =   2.1 list = [], str =”(“ open =1 close = 0
+	2.2 str.length()==1, !=4
+	2.5 1 < 3
+	2.6 = 3.1 list = [] str =”((” open = 2, close = 0
+		3.2 2!= 6
+		3.5 2 < 3
+		3.6 = 4.1 list = [] str = “(((“ open = 3 close = 0
+			4.2 3!=6
+			4.5 open = max
+			4.7 0 < open
+			4.8 = 5.1 list=[] Str=”((()” o=3 c=1
+				5.7 1<3
+				5.8 = 6.1 l=[] s=”((())” o = 3 c = 2
+					6.7 2<3
+					6.8 = 7.1 l = [] s=”((()))” o=3 c=3
+						7.2 6 = 6
+						7.3 list = [“((()))”]
+						7.4 return;
+		3.7 0<3
+		3.8 = 4.1.2 =[“((()))”] str = “((()” open =3 close =1
+			4.7.2
+			4.8.2 = 5.1.2  str = “((())” open =3 close = 1
+				5.2.2 
+        
+        代码如下
+        public class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<String>();
+        String str = new String();
+        backtrack(res, str, n, n);
+        return res;
+    }
+    private static void backtrack(List<String> res, String str, int left, int right){
+        if(left == 0 && right == 0){
+            res.add(str);
+            return;
+        }
+        if(left > 0){
+            backtrack(res, str+"(", left - 1, right);
+        }
+        if(right > left){
+            backtrack(res, str+")", left, right - 1);
+        }
+    }
+}
