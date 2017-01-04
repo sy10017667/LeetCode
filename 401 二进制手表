@@ -18,3 +18,76 @@ public class Solution {
         return res;
     }
 }遍历小时和分钟，看看哪对的二进制里的1的个数加起来等于n 就把对时间放到最终结果里。
+
+第二个解法：
+建造[1,1,1,0,0]  代表相应亮着的灯
+
+public class Solution {
+    public List<String> readBinaryWatch(int num) {
+        List<String> res = new ArrayList<>();
+        List<List<Integer>> twoDArray = new ArrayList<>();
+        twoDArray = permute(num);
+        System.out.println(twoDArray);
+        res = convertToListString(twoDArray);
+        System.out.println(res);
+        return res;
+    }
+    private static List<String> convertToListString(List<List<Integer>> twoDArray){
+        List<String> res = new ArrayList<>();
+        for(List<Integer> nums : twoDArray){
+            String str = convert(nums);
+            if(str != "a") res.add(str);
+        }
+        return res;
+    }
+    private static String convert(List<Integer> nums){
+        StringBuilder res = new StringBuilder();
+        int hours = 0;
+        int mins = 0;
+        if(nums.get(0) == 1) hours += 8;
+        if(nums.get(1) == 1) hours += 4;
+        if(nums.get(2) == 1) hours += 2;
+        if(nums.get(3) == 1) hours += 1;
+        if(nums.get(4) == 1) mins += 32;
+        if(nums.get(5) == 1) mins += 16;
+        if(nums.get(6) == 1) mins += 8;
+        if(nums.get(7) == 1) mins += 4;
+        if(nums.get(8) == 1) mins += 2;
+        if(nums.get(9) == 1) mins += 1;
+        
+        if(hours > 11 || mins > 59) return "a";
+        res.append(hours);
+        res.append(":");
+        if( mins < 10) res.append(0);
+        res.append(mins);
+//        System.out.print(res);
+        return res.toString();
+    }
+    private static List<List<Integer>> permute(int num) {
+        int[] nums = new int[10];
+        for(int i = 0 ; i < num; i++) nums[i] = 1;
+        System.out.println(nums[1]);
+        
+        List<List<Integer>> list = new ArrayList<>();
+        // Arrays.sort(nums); // not necessary
+        backtrack(list, new ArrayList<>(), nums, new boolean[nums.length]);
+        System.out.println(list);
+        return list;
+    }
+    
+    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums, boolean [] used){
+    if(tempList.size() == nums.length){
+        list.add(new ArrayList<>(tempList));
+    } else{
+        for(int i = 0; i < nums.length; i++){
+            if(used[i] || i > 0 && nums[i] == nums[i-1] && !used[i - 1]) continue;
+            used[i] = true; 
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, used);
+            used[i] = false; 
+            tempList.remove(tempList.size() - 1);
+            }
+        }
+    }
+    
+}
