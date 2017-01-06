@@ -52,3 +52,13 @@ public class MinStack {
             MinStack.push(x);
     }
 就通过了 ，不知道为什么
+后来我又改写了一下我自己的
+    public void push(int x) {
+        stack.push(x);
+        if(MinStack.peek() >=x){
+            MinStack.push(x);
+        }
+    }
+    
+    
+  把<= 和>=换了一下位置  就通过了。
