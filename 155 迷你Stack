@@ -42,3 +42,13 @@ public class MinStack {
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
+ 
+ 把push函数 换成
+     public void push(int x) {
+        stack.push(x);
+        if (MinStack.empty() == true)
+            MinStack.push(x);
+        else if (MinStack.peek() >= x)
+            MinStack.push(x);
+    }
+就通过了 ，不知道为什么
