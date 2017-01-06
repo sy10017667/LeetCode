@@ -1,0 +1,37 @@
+class MyStack {
+    Queue<Integer> q = new LinkedList<Integer>();
+    // Push element x onto stack.
+    public void push(int x) {
+        q.offer(x);
+    }
+
+    // Removes the element on top of the stack.
+    public void pop() {
+        int i = 0;
+        while(i < q.size()-1){
+            q.offer(q.poll());
+            i++;
+        }
+        q.poll();
+    }
+    // Get the top element.
+    public int top() {
+        int i = 0;
+        while(i < q.size()-1){
+            q.offer(q.poll());
+            i++;
+        }
+        int x = q.peek();
+        q.offer(q.poll());
+        return x;
+        
+    }//[1,2]
+
+    // Return whether the stack is empty.
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}这个我只用了一个队列，2个stack就像是一个流沙瓶子，从一到倒腾到另一个时候，顺序是反过来的，而二个队列就像是，一个呼啦圈，还会转回原地。
+此题我就改了pop 和peek的方法
+pop就是 如果想出债[1,2,3,4] 我就把队列的头部加到尾部 size()-1次， 我们有[4,1,2,3]然后poll.变成[1,2,3] 扔出4
+peek思想同样，如果[1,2,3,4] 想看一眼peek,我就倒腾size()-1次，[4,1,2,3] 看一眼，然后再倒腾一次变回[1,2,3,4].
