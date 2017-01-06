@@ -1,0 +1,44 @@
+TLE 解法
+
+public class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> MinStack;
+    /** initialize your data structure here. */
+    public MinStack() {
+        stack = new Stack<Integer>();
+        MinStack = new Stack<Integer>();
+        MinStack.push(Integer.MAX_VALUE);
+    }
+    
+    public void push(int x) {
+        if(x <= MinStack.peek()){   此处不要忘记等于号，因为可能连续两个相等的值填入，在出stack的时候可能把min值用没了。
+            MinStack.push(x);
+        }
+        stack.push(x);
+        System.out.println(stack);
+    }
+    
+    public void pop() {
+        if(stack.peek().equals(MinStack.peek())){  //此处注意用equals
+            MinStack.pop();
+        }
+        stack.pop();
+    }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return MinStack.peek();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
