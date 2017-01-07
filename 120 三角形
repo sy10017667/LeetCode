@@ -1,0 +1,42 @@
+思路是 在原三角形上，把上面的每一行的值加到下面一行，，然后把最后一行的最小值返回回来就可以了
+由于左面这一斜线只能从左面网上一个加下来 即 nums[i][0] + = nums[i-1][0]
+右面的 只能从右面的加下来，即nums[height][length] += [height-1][length-1] 加下来
+中间的部分从第三排第二个数开始DP DP方程为nums[i][j]+= nums[i][j] + Min([i-1][j],[i-1][j-1])
+写的比较复杂，最后返回List里最小值的时候我也没找到现成的API，手动比较大小，写的比较长，见笑了。
+     1
+    2  3
+   4  5   6
+7   8   9   10
+
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        // special case
+        
+        //Initial
+        int[] dp = new int[triangle.size()];
+        int height = triangle.size();
+        //left
+        for(int i = 1; i < height; i++){
+            triangle.get(i).set(0,triangle.get(i).get(0) + triangle.get(i-1).get(0));
+        }
+        System.out.println(triangle);
+
+        //right
+        for(int i = 1; i < height; i++){
+            triangle.get(i).set(i, triangle.get(i).get(i) + triangle.get(i-1).get(i-1));
+        }
+        System.out.println(triangle);
+        
+        for(int i = 2; i < height; i++){
+            for(int j = 1; j < i; j++){
+                triangle.get(i).set(j,triangle.get(i).get(j) + Math.min(triangle.get(i-1).get(j),triangle.get(i-1).get(j-1)));
+            }
+        }
+        System.out.println(triangle);
+        int min = triangle.get(height -1).get(0);
+        for (int x: triangle.get(height -1)){
+            if(min > x) min = x;
+        }
+        return min;
+    }
+}
