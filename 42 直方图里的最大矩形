@@ -1,0 +1,33 @@
+自己想出来的brute force，果然超时了。
+最大长方形，一定是，以其中一个柱子的最大高度乘以N n为旁边连续的和它一样高或比他高的柱子的个数
+所以我就对遍历每一个柱子，
+[3,2,2,3,1]比如说第三个柱子， 2 它左面的两个都大于等于他，所以可以算进去，右面的一个大于它，所以可以算进去，所以以第三根柱子为基准的最大长方形的面积是8.
+不过超时了，白搭。
+public class Solution {
+    public int largestRectangleArea(int[] nums) {
+        //special case
+        if(nums == null || nums.length == 0) return 0;
+        //Initialization
+        int[] dp = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) dp[i] = nums[i];
+        
+        for(int i = 0; i < nums.length; i++){
+            // to right
+            int j = i + 1;
+            while(j < nums.length){
+                if(nums[j] >= nums[i]){dp[i] += nums[i]; j++;}
+                else break;
+            }
+            // to left
+            int k = i - 1;
+            while(k >= 0){
+                if(nums[k] >= nums[i]){dp[i] += nums[i]; k--;}
+                else break;
+            }
+        }
+        
+        //return maximum of dp
+        Arrays.sort(dp);
+        return dp[nums.length-1];
+    }
+}
