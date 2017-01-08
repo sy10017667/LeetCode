@@ -138,5 +138,14 @@ DP 天天见😂
 62. Unique Paths  ✅
 63. Unique Paths II ✅
 64. Minimum Path Sum  ✅
-55. Jump Game
+55. Jump Game   DP TLE
 132. Palindrome Partitioning II
+
+1/8/2017
+深度优先搜索😡
+133. Clone Graph
+拓扑排序 http://www.geeksforgeeks.org/topological-sorting/
+77. Combinations
+51. N-Queens
+127. Word Ladder
+126. Word Ladder II
