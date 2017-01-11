@@ -1,0 +1,25 @@
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+      //  int[] res = new int[len];
+        int [] left = new int[len];
+        left[0] = 1;
+        for (int i = 1; i < len; i++){
+            left[i] = left[i-1] * nums[i-1];
+        }
+        int [] right = new int[len];
+        right[len-1] = 1;
+        for (int j = len - 2; j >= 0; j--){
+            right[j] = right[j+1]* nums[j+1];
+        }
+        
+        for (int k = 0; k < len; k++){
+            nums[k] = left[k] * right[k];
+        }
+        return nums;
+    }
+}
+建立两个数组，一个代表 nums[n] = nums[0] * nums[1] * nums[2]*...nums[n-1]
+另外一个代表 nums[n] = nums[n+1] * nums[n+2] * nums[end];
+然后原来数组等于两个数组对应项相乘 时间复杂O(n) 空间O(n)
+枚举法 双重循环，对于每一个数都遍历数组把除了它自己的数乘起来。
