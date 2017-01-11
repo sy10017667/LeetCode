@@ -1,0 +1,17 @@
+TLE 解： 如果当前元素和前一个元素相等，就把后面所有我元素覆盖之前的一个元素
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        // write your code here
+        int res = nums.length;
+        for (int i = 1; i < nums.length; i++){
+            if (nums[i] == nums[i-1]){
+                for(int j = i; j < nums.length - 1; j++){
+                    nums[j] = nums[j+1];
+                }
+                i--;
+            }
+            res--;
+        }
+        return res;
+    }
+}
