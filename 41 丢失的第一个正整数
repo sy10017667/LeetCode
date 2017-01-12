@@ -1,0 +1,32 @@
+public class Solution {
+    public int firstMissingPositive(int[] nums) {
+    
+        if(nums.length == 0 || nums == null) return 1;
+    
+        for (int i = 0; i < nums.length; i++){
+            while (nums[i] > 0 && nums[i] < nums.length && nums[i]!= i+1){
+                if (nums[i] == nums[nums[i]-1]) break;
+                    int temp = nums[nums[i]-1];
+                    nums[nums[i]-1] = nums[i];
+                    nums[i] = temp;
+                  /*              int temp = nums[i];  这个地方不能把temp 先赋值成nums[i]   
+                                  nums[i] = nums[nums[i]-1];
+                                  nums[nums[i]-1] = temp;   正常来说 i 应该在第i-1 的位置，nums[nums[i]-1] 表示 在i应该在的那个位置的数
+                                  在这一步会出问题 应为这个时候 nums[i] 已经变化过了 所以会死循环 */
+          }
+        }
+        for (int j = 0; j < nums.length; j++){
+            if(nums[j] != j + 1){
+                return j + 1;}
+        }
+        return nums.length + 1;
+    }
+}
+/*
+[1,2]
+思路就是 如果给定nums长度为5，那么第一个missing的正整数一定是 123456 其中的一个数
+所以就把这5个数排序争取放成[1,2,3,4,5]的样子
+1 负数  [1,-1,2,3,4]  放成这个样子 再遍历数组 如果找到第i个数，不等于i+1 那么i+1就是那个missing number
+2 大于数组长度的数  [1,100,2,3,4] 同样道理
+3 重复的数 [1,1,2,3,4] 同样道理，就是swap的时候要特殊处理一下避免死循环
+*/
