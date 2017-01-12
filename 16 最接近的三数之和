@@ -1,0 +1,47 @@
+最开始题目理解错了，以为是找出离target最近的三个数。
+public class Solution {
+    public int threeSumClosest(int[] nums, int t) {
+        // write your code here
+        for (int i = 0; i < nums.length; i++){
+            for (int j = i + 1; j < nums.length; j++){
+                compare(nums, i, j, t);
+                System.out.println(Arrays.toString(nums));
+            }
+        }
+        return nums[0] + nums[1] + nums[2];
+    }
+    private static void compare(int[] nums, int i, int j, int t){
+        if (Math.abs(nums[i] - t) > Math.abs(nums[j] - t)){
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+    }
+}
+
+后来的双指针解法，我觉得这道题要比3sum容易一些，因为不用考虑重复的问题。
+
+public class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int res = nums[0] + nums[1] + nums[2];
+        
+        for (int i = 0; i < nums.length - 2; i++){
+            int j = i + 1;
+            int k = nums.length - 1;
+            while(j < k){
+                int sum = nums[i] + nums[j] + nums[k];
+                if (Math.abs(sum - target) < Math.abs(res - target)) res = sum;
+                
+                if (sum == target){
+                    return sum;
+                }else if (sum < target){
+                    j++;
+                }else{
+                    k--;
+                }
+            }
+        }
+        return res;
+    }
+}
