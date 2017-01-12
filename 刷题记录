@@ -163,7 +163,7 @@ DP 天天见😂
 8. String to Integer (atoi) 
 
 1/11/2017
-Lintcode
+Lintcode 数组
 172 删除元素    ✅
 138 子数组之和
 100 删除排列数组中的重复数字    ✅
@@ -171,8 +171,9 @@ Lintcode
 64 合并排序数组   ✅
 56 两数之和
 sum = 102;
+
 1/12/2017
-Lintcode
+Lintcode 数组
 50 数组剔除元素后的乘积
 57 三数之和 
 59 最接近的三数之和 
