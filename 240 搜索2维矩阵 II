@@ -1,0 +1,64 @@
+这道题是lint28题，两题思想想通，但是题目描述略有不同
+Lintcode上 是这样要求的：
+
+写出一个高效的算法来搜索m×n矩阵中的值，返回这个值出现的次数。
+这个矩阵具有以下特性：
+每行中的整数从左到右是排序的。
+每一列的整数从上到下是排序的。
+在每一行或每一列中没有重复的整数。
+
+思想就是，从左下角 或者右上角开始走路
+
+/*
+[1,  4, 5, 7]
+[4, 11,16,20]
+[23,30,34,50]   3
+m[1][0]
+*/
+1.
+我们来说从左下角开始的，根据题意，矩阵从左至右和从上至下都是不重复递增的：
+1.1所以如果左下角的值大于目标值，那说明从那个值所有右面的值都大于目标值，所以我们往上搜索
+1.2如果左下角的值小于目标值，那么说明那个值所有上面的值都小于目标值，所以我们往右走
+1.3如果左下角的值等于目标值，说明那个值所所在位置的所有的上面都小于目标值，右面都大于目标值，所以我们往右上走
+如果我们达到了边界 无论是上边界，右边界还是右上边界，都说明搜索完毕。时间复杂度为O（M+N）
+leetcode 是这样描述的：
+
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+
+Integers in each row are sorted in ascending from left to right.
+Integers in each column are sorted in ascending from top to bottom.
+For example,
+
+Consider the following matrix:
+
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+Given target = 5, return true.
+
+Given target = 20, return false.
+
+比lintcode的更简答， lintcode还需要查个数，这个找到就退出就可以了。代码如下：
+
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // write your code here
+        boolean res = false;
+        int m = matrix.length - 1;
+        int n = 0;
+        while ( m >= 0 && n < matrix[0].length){
+            if (matrix[m][n] == target){
+                return true;
+            }else if (matrix[m][n] > target){
+                m--;
+            }else{
+                n++;
+            }
+        }
+        return res;        
+    }
+}
