@@ -1,0 +1,26 @@
+71. Simplify Path
+
+public class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> stack = new Stack<>();
+        String[] pathList = path.split("/");
+        System.out.println(pathList);
+        for(String str : pathList){
+            if (str.equals("..") && !stack.empty()){
+                stack.pop();
+            }else if(str.equals("") || str.equals(".") || str.equals("..")){
+                continue;
+            }else{
+                stack.push(str);
+            }
+        }
+        String res = "";
+        for(String s: stack){
+            res += "/";
+            res += s;
+        }
+        return res.equals("") ? "/":res;
+    }
+}
+先把给定的路径 按照“/"分开。 "" 和"." 表示什么也不做。 ".."表示返回上一层
+思路就是建一个栈，如果遇见..就弹栈，遇见字母和...就压栈.最后遍历栈把路径表示出来。比较简单。
