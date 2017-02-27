@@ -35,3 +35,42 @@ class MyStack {
 此题我就改了pop 和peek的方法
 pop就是 如果想出债[1,2,3,4] 我就把队列的头部加到尾部 size()-1次， 我们有[4,1,2,3]然后poll.变成[1,2,3] 扔出4
 peek思想同样，如果[1,2,3,4] 想看一眼peek,我就倒腾size()-1次，[4,1,2,3] 看一眼，然后再倒腾一次变回[1,2,3,4].
+
+二刷，思路和第一次一样
+
+public class MyStack {
+//1234
+    /** Initialize your data structure here. */
+    Queue<Integer> q;
+    public MyStack() {
+        this.q = new LinkedList<>();
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        q.offer(x);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        for(int i = 1; i < q.size(); i++){
+            q.offer(q.poll());
+        }
+        return q.poll();
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        for(int i = 1;i < q.size(); i++){
+            q.offer(q.poll());
+        }
+        int a = q.peek();
+        q.offer(q.poll());
+        return a;
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return q.size() == 0;
+    }
+}
