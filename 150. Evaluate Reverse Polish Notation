@@ -1,0 +1,78 @@
+public class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        int a,b;
+        for(String str : tokens){
+            if(str.equals("+")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(a + b);
+            }
+            else if(str.equals("-")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(b - a);
+            }
+
+            else if(str.equals("*")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(a * b);
+            }
+            else if(str.equals("/")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(b / a);
+            }
+            else{
+                stack.push(Integer.parseInt(str));
+            }
+            
+        }
+        
+        return stack.pop();
+    }
+}
+这题和之前做过，给定一个算术字符串，然后让计算结果的差不多，需要注意的就是除法和剑法的时候，是pop2次的数减去 或者除以pop一次的数。加法和乘法就无所谓了。
+比如说 [4,2,/] 
+a = s.pop() = 2
+b = s.pop() = 4
+push b / a = 2
+下面的是我第一次写的麻烦版本：
+
+
+public class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<String> stack = new Stack<>();
+        HashSet set = new HashSet(Arrays.asList("+", "-", "*", "/"));
+        int a,b;
+        for(String str : tokens){
+            if(!set.contains(str)){
+                stack.push(str);
+            }else{
+                if(str.equals("+")){
+                    a = Integer.valueOf(stack.pop());
+                    b = Integer.valueOf(stack.pop());
+                    stack.push(String.valueOf(a + b));
+                }
+                else if(str.equals("-")){
+                    a = Integer.valueOf(stack.pop());
+                    b = Integer.valueOf(stack.pop());
+                    stack.push(String.valueOf(b - a));
+                }
+
+                else if(str.equals("*")){
+                    a = Integer.valueOf(stack.pop());
+                    b = Integer.valueOf(stack.pop());
+                    stack.push(String.valueOf(a * b));
+                }
+                else if(str.equals("/")){
+                    a = Integer.valueOf(stack.pop());
+                    b = Integer.valueOf(stack.pop());
+                    stack.push(String.valueOf(b / a));
+                }
+            }
+        }
+        return Integer.valueOf(stack.pop());
+    }
+}
