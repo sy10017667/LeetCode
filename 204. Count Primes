@@ -1,0 +1,40 @@
+public class Solution {
+    public int countPrimes(int n) {
+        boolean[] list = new boolean[n];
+        Arrays.fill(list, true);
+        int res = 0;
+        for(int i = 2; i < n; i++){ // 此处课改为 i * i < n
+            if(list[i] == true){
+                for(int j = 2; j * i < n; j++){
+                    list[i*j] = false;
+                }
+            }
+        }
+        for(int i = 2; i < n; i++){
+            if(list[i] == true) res++;
+        }
+        return res;
+    }
+}
+质数的定义：质数是说有1和他本身两个约数的自然数 ， 比如说 2 可以被 1 和2 整除，5可以被1 和5 整除。
+0 和 1 都不是质数。
+最好想的办法就是写一个判断一个整数是不是prime的函数。然后从2判断到n-1.查质数的个数，复杂度为n^2.
+
+下面的方法就是为这道题设计的。思路就是建立一个长度为n的布尔值数组。从2开始，把所有2~n之间2的倍数全部复制为false。然后查有多少个true。
+因为一个数如果不是质数，就一定被 n*m 可以整除，n和m中，一定有一个小于等于 根号n，所以便利到 根号n就可以了。
+Sieve of Eratosthenes算法
+https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+伪代码如下
+ Input: an integer n > 1.
+ 
+ Let A be an array of Boolean values, indexed by integers 2 to n,
+ initially all set to true.
+ 
+ for i = 2, 3, 4, ..., not exceeding √n:
+   if A[i] is true:
+     for j = i2, i2+i, i2+2i, i2+3i, ..., not exceeding n:
+       A[j] := false.
+ 
+ Output: all i such that A[i] is true.
+ 
+ 
