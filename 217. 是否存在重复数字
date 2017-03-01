@@ -1,0 +1,14 @@
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> set = new HashSet<Integer>();
+        for(Integer x: nums){
+            set.add(x);
+        }
+        if (nums.length > set.size()){
+            return true;
+        }
+        return false;
+    }
+}
+
+Hashset 自动消除重复
