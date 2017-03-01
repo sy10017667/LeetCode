@@ -1,0 +1,25 @@
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    
+    private static void reverse(int[] nums, int l, int r){
+        while(l < r){
+            int temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+            l++;
+            r--;
+        }
+    }
+}
+
+k 有可能大于数组长度，所以取余数因为如果数组长度是3 k = 4，就越界了。
+[1,2,3] 翻转4次
+[3,1,2]
+[2,3,1]
+[1,2,3]
+[3,1,2]相当于翻转 4 % 3 = 1 次
