@@ -1,0 +1,22 @@
+public class Solution {
+    public char findTheDifference(String s, String t) {
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        for(char x : s.toCharArray()){
+            if(map.containsKey(x)){
+                map.put(x, map.get(x) + 1);
+            }else{
+                map.put(x,1);
+            }
+        }
+        for(char y: t.toCharArray()){
+            if(map.containsKey(y)){
+                map.put(y, map.get(y) - 1);
+                if(map.get(y) == 0) map.remove(y);
+            }else{
+                return y;
+            }
+        }
+        return 'a';
+    }
+}
+和 2sum的思路差不多
