@@ -1,0 +1,34 @@
+class Solution{
+    public int findPeakElement(int[] nums){
+        int l = 0, r = nums.length - 1;
+        while(l + 1 < r){
+            int mid = l + (r - l) / 2;
+            if(nums[mid] > nums[mid - 1]){
+                if(nums[mid] > nums[mid + 1]) return mid;
+                else if (nums[mid] < nums[mid + 1]) l = mid;
+            }else if(nums[mid] < nums[mid - 1]){
+                r = mid;
+            }
+        }
+        return nums[l] > nums[r]? l : r;
+    }
+}
+自己写的，AC了。因为二分搜索是中间开始，所以l 和 r 设置成两遍也不会越界
+下面九章的答案更保守一些
+
+/*class Solution{
+    public int findPeakElement(int[] nums){
+        int start = 1, end = nums.length - 2;
+        while(start + 1 < end){
+            int mid = start + (end - start) / 2;
+            if(nums[mid] < nums[mid - 1]){
+                end = mid;
+            }else if(nums[mid] > nums[mid + 1]){
+                start = end;
+            }else{
+                end = mid;
+            }
+        }
+        return nums[start] > nums[end]? start : end;
+    }
+}
