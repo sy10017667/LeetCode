@@ -1,0 +1,10 @@
+public class Solution {
+    public int findComplement(int num) {
+        int mask = (Integer.highestOneBit(num) << 1) - 1;
+        return mask ^ num;
+    }
+}
+
+假如说原来的数是               101
+我们需要一个mask 1000 - 1 =  0111 
+为了得到010  把原来的数和mask亦或
