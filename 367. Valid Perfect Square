@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean isPerfectSquare(int num) {
+        long l = 1;
+        long r = num;
+        while(l + 1 < r){
+            long mid = l + (r - l) / 2;
+            long square = mid * mid;
+            System.out.println(square);
+            if(square == num){
+                return true;
+            }else if(square < num){
+                l = mid;
+            }else{
+                r = mid;
+            }
+        }
+        if(l * l == num || r * r == num){
+            return true;
+        }
+        return false;
+    }
+}
+注意用长形。和69. Sqrt(x) 差不多
