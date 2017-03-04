@@ -1,0 +1,13 @@
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int pointer = 0;
+        for(int i = 0; i < s.length(); i++){
+            pointer = t.indexOf(s.charAt(i),pointer);
+            
+            if(pointer == -1) return false;
+            else pointer++;
+        }
+        return true;
+    }
+}
+主要是要知道 indexOf这个API
