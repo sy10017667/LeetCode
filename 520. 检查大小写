@@ -1,0 +1,17 @@
+public class Solution {
+    public boolean detectCapitalUse(String s) {
+        if(s == null || s.length() <= 1) return true;
+        // first and second is capital.. all need to be capital
+        if(Character.isUpperCase(s.charAt(0)) && Character.isUpperCase(s.charAt(1))){
+            for(int i = 1; i < s.length(); i++){
+                if(Character.isLowerCase(s.charAt(i))) return false;
+            }            
+        }else{ // the second letter is not capital, all need to be lower case.
+            for(int i = 1; i < s.length(); i++){
+                if(Character.isUpperCase(s.charAt(i))) return false;
+            }
+        }
+        
+        return true;
+    }
+}
