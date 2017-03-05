@@ -1,0 +1,34 @@
+public class Solution {
+    public int islandPerimeter(int[][] grid) {
+        if(grid == null || grid.length == 0 || grid[0].length == 0) return 0;
+        int res = 0;
+        int row = grid.length; // y 3 
+        int col = grid[0].length;// x 4
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[0].length; j++){
+                if(grid[i][j] == 1){
+                    res += 4 - CheckSourrouding(grid, i, j);
+                }
+            }
+        }
+        return res;
+        
+    }
+    private static int CheckSourrouding(int[][] grid , int x , int y){
+        int res = 0;
+        if(x > 0) res += grid[x - 1][y];
+        if(x < grid.length - 1) res += grid[x + 1][y];
+        if(y > 0) res += grid[x][y - 1];
+        if(y < grid[0].length - 1) res += grid[x][y + 1];
+        return res;
+    }
+}
+
+//[[1,0,0,1],[0,0,1,1],[1,0,1,0]]
+
+/*
+[[1,0,0,1],
+ [0,0,1,1],
+ [1,0,1,0]]
+*/
+就是写一个辅助函数，查有几个临街的方块，每多一个临街的，总边长就减少1
