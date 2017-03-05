@@ -1,0 +1,33 @@
+动态规划解法，先比较排序，然后dp
+
+public class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        if(envelopes == null || envelopes.length == 0){
+            return 0;
+        }
+        
+        Arrays.sort(envelopes, new Comparator<int[]>(){
+            public int compare(int[] a, int[] b){
+                if(a[0] != b[0]){
+                    return a[0] - b[0];
+                }else{
+                    return a[1] - b[1];
+                }
+            }
+        });
+        int[] dp = new int[envelopes.length];
+        for(int i = 0; i < envelopes.length; i++){
+            dp[i] = 1;
+            for(int j = i - 1; j >= 0; j--){ //往前找最先能被放进去的。
+                if(envelopes[j][0] < envelopes[i][0] && envelopes[j][1] < envelopes[i][1]){
+                    dp[i] = Math.max(dp[i],dp[j] + 1);
+                }
+            }
+        }
+        int max = 1;
+        for(int x : dp){
+            if(x > max) max = x;
+        }
+        return max;
+    }
+}
