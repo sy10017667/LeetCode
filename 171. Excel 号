@@ -1,0 +1,12 @@
+public class Solution {
+    public int titleToNumber(String s) {
+        String alphabeta = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int ex = s.length() - 1;
+        int res = 0;
+        for(int i = 0; i < s.length(); i++){
+            res += alphabeta.indexOf(s.charAt(i)) * Math.pow(26,ex);
+            ex--;
+        }
+        return res;
+    }
+}
