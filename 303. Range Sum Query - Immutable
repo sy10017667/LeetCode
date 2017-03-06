@@ -1,0 +1,45 @@
+public class NumArray {
+    int[] LtoR;
+    int[] RtoL;
+    int sum = 0;
+    int nums;
+    public NumArray(int[] nums) {
+        LtoR = new int[nums.length];
+        LtoR[0] = nums[0];
+        for (int i = 1; i < nums.length; i++){
+            LtoR[i] = LtoR[i-1] + nums[i];
+        }
+        RtoL = new int[nums.length];
+        RtoL[nums.length - 1] = nums[nums.length -1];
+        for (int i = nums.length - 2; i >= 0; i--){
+            RtoL[i] = RtoL[i+1] + RtoL[i];
+        }
+        for (int x : nums){
+            sum += x;
+        }
+        
+    }
+    
+    public int sumRange(int i, int j) {
+        return sum - LtoR[i] - RtoL[j] + nums[i] + nums[j];
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(i,j);
+ 
+ 
+ Given nums = [-2,  0, 3, -5,  2, -1]  sum = -3
+        l to r[-2, -2, 1, -4, -2, -3]
+        r to l[-3  -1 -1  -4  1  -1 ]
+-2 
+    0
+      3 -5 2 -1
+
+sumRange(0, 2) -> 1
+sumRange(2, 5) -> -1
+sumRange(0, 5) -> -3
+
+*/
