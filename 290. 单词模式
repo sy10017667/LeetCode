@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean wordPattern(String s, String strs) {
+        String[] list = strs.split(" ");
+        if (s.length() != list.length) return false;
+        HashMap<Character, String> map = new HashMap<Character, String>();
+        HashSet<String> set = new HashSet<String>();
+        
+        for(int i = 0; i < s.length(); i++){
+            if (map.containsKey(s.charAt(i))){
+                if (!map.get(s.charAt(i)).equals(list[i])){
+                    return false;
+                }
+                continue;
+            }else{
+                if (set.contains(list[i])) return false;
+                map.put(s.charAt(i), list[i]);
+                set.add(list[i]);
+            }
+        }
+        return true;
+    }
+}
+
+//和同形字符串一样。
