@@ -1,0 +1,51 @@
+此题很讨厌
+public class Solution {
+    public String originalDigits(String s) {
+        int[] count = new int[10];
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if      (c == 'z') count[0]++;
+            else if (c == 'w') count[2]++;
+            else if (c == 'u') count[4]++;
+            else if (c == 'x') count[6]++;
+            else if (c == 'g') count[8]++;
+            // above are unique.
+            else if (c == 'h') count[3]++;//3,8
+            else if (c == 'f') count[5]++;//4,5
+            else if (c == 's') count[7]++;//6,7
+            else if (c == 'i') count[9]++;//5,6,8,9
+            else if (c == 'o') count[1]++;//0,1,2,4
+        }
+        count[3] -=  count[8];
+        count[5] -= count[4];
+        count[7] -= count[6];
+        count[9] = count[9] - count[5] - count[6] - count[8];
+        count[1] = count[1] - count[0] - count[2] - count[4];
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < count[i]; j++){
+                sb.append(i);
+            }
+        }
+        return sb.toString();
+    }
+}
+/*
+zero            !
+one 
+two             ！
+three           ！
+four            
+five 
+six 
+seven  
+eigth           !
+nine 
+ 
+//[1,3,4,5,7,9]
+用z判断0 用w判断2 用u判断4 用x判断6 用g判断8
+         用t判断3 用f判断5 用s判断7 
+         用o判断1 用i判断9
+         
+*/
