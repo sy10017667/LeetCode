@@ -19,3 +19,17 @@ public class Solution {
         return res;
     }
 }
+public class Solution {
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        return countNodes(root.left) + countNodes(root.right) + 1;
+    }
+}
+深度优先也超时
+public class Solution {
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        return countNodes(root.left) + countNodes(root.right) + 1;
+    }
+}
+所以这题必须得用完整树的属性
