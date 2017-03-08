@@ -1,0 +1,21 @@
+public class Solution {
+    int count = 0;
+    int res = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        inorder(root, k);
+        return res;
+    }
+    
+    private void inorder(TreeNode root, int k){
+        if (root == null) return;
+        inorder(root.left, k);
+        count++;
+        if (count == k) res = root.val;
+        inorder(root.right, k);
+    }
+}
+
+BST的性质就是中序遍历会输出从小到大的数组，每递归调用一次，就像左
+[5,2,6,1,10,4,7]
+3
+不应该是4吗？
