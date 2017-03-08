@@ -1,0 +1,44 @@
+先写了一个跑不通的版本，我以为输入就是从【123456】。。按照顺序来的。 heater 是【1，3，5】在范围内的。
+public class Solution {
+    public int findRadius(int[] houses, int[] heaters) {
+        if (heaters.length == 0) {
+            return Integer.MAX_VALUE;
+        }
+        int[] nums = new int[houses.length];
+        int radius = 0;
+        for (int i = 0; i < nums.length; i++){
+            nums[x-1] = 1;
+        }
+//[1,2,3]    [1,0,0]
+//[1]        
+        for (int i = 0; i < nums.length; i++){
+            if (nums[i] == 0){
+                radius = Math.max(radius, Math.min(findFirstHeater(nums, i), findLastHeater(nums, i)));
+            }
+        }
+        return radius;
+    }
+    private int findFirstHeater(int[] nums, int pos){
+        int res = Integer.MAX_VALUE;
+        for(int i = pos; i < nums.length; i++){
+            if (nums[i] == 1){
+                res = i;
+                break;
+            }
+        }
+        return res - pos;
+    }
+    //[0,0,0,1]
+    private int findLastHeater(int[] nums, int pos){
+        int res = Integer.MIN_VALUE;
+        for (int i = pos; i >= 0; i--){
+            if (nums[i] == 1){
+                res = i;
+                break;
+            }
+        }
+        return pos - res;
+    }
+}
+
+
