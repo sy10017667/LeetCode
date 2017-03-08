@@ -1,0 +1,29 @@
+public class Solution {
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < A.length; i++){
+            for (int j = 0; j < B.length; j++){
+                int sum = A[i] + B[j];
+                if (map.containsKey(sum)){
+                    map.put(sum, map.get(sum) + 1);
+                }else{
+                    map.put(sum, 1);
+                }
+            }
+        }
+        
+        int count = 0;
+        for (int l = 0; l < C.length; l++){
+            for (int r = 0; r < D.length; r++){
+                int sum = - (C[l] + D[r]);
+                if (map.containsKey(sum)){
+                    count += map.get(sum);
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+这就是二数之合的升级版。把两个数分一组了。
