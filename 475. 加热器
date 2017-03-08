@@ -4,13 +4,14 @@ public class Solution {
         if (heaters.length == 0) {
             return Integer.MAX_VALUE;
         }
-        int[] nums = new int[houses.length];
+        int len = Math.max(houses[houses.length - 1], heaters[heaters.length - 1]);
+        int[] nums = new int[len+1];
         int radius = 0;
-        for (int i = 0; i < nums.length; i++){
-            nums[x-1] = 1;
+        for (int x: nums){
+            nums[x] = 1;
         }
-//[1,2,3]    [1,0,0]
-//[1]        
+//[1,2,3]
+//[3]       [0,0,1]
         for (int i = 0; i < nums.length; i++){
             if (nums[i] == 0){
                 radius = Math.max(radius, Math.min(findFirstHeater(nums, i), findLastHeater(nums, i)));
@@ -40,5 +41,4 @@ public class Solution {
         return pos - res;
     }
 }
-
-
+调不出来了。有空再调
