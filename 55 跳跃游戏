@@ -15,3 +15,20 @@ public class Solution {
         return reachable[nums.length-1];
     }
 }
+
+
+O(n)的解法来啦！！！！
+public class Solution {
+    public boolean canJump(int[] nums) {
+        int cover = 0;
+        
+        for (int i = 0; i < nums.length; i++){
+            if (cover >= i) cover = Math.max(cover, i + nums[i]);
+        }
+        return cover >= nums.length -1;
+    }
+}
+/*[2,3,1,1,4] 5
+i  0 1
+c          0
+8/
