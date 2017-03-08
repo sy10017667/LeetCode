@@ -28,3 +28,35 @@ root = 1, str = 1, res = []
 root = 2, str = 1->2 res = []
 root = 5, str = 1->2->5 res = []
 root = null 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<String>();
+        if (root == null) return res;
+        dfs(root, String.valueOf(root.val), res);
+        return res;
+    }
+    private void dfs(TreeNode root, String str, List<String> res){
+        if (root == null) {
+            return;
+        }
+        if (root.left == null && root.right == null){
+            res.add(str);
+            return;
+        }
+        if (root.left != null){
+            dfs(root.left, str + "->" + String.valueOf(root.left.val), res);
+        }
+        if (root.right != null){
+            dfs(root.right, str + "->" + String.valueOf(root.right.val), res);
+        }       
+    }
+}
