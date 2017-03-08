@@ -1,0 +1,19 @@
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        List<Integer> list = new ArrayList<Integer>();
+        inorder(root, list);
+        int pre = list.get(0);
+        for (int i = 1; i < list.size(); i++){
+            if (list.get(i) <= pre) return false;
+            pre = list.get(i);
+        }
+        return true;
+    }
+    private void  inorder(TreeNode root, List<Integer> list){
+        if (root == null) return;
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
+}就是构造一个动态数组，中序遍历把值都放里，然后遍历动态数组确保每一个值都小于下一个值。
