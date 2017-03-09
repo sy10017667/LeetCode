@@ -1,0 +1,22 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length <= 2) {
+            return nums.length;
+        }        
+        int start = 1;
+        for (int i = 2; i < nums.length; i++){
+            if (nums[i] != nums[start] || nums[i] != nums[start-1]){
+                start++;
+                int temp = nums[i];
+                nums[i] = nums[start];
+                nums[start] = temp;
+            }
+        }
+        return start + 1;
+    }
+}
+
+
+[1, 1, 2, 2, 3, 1]
+s
+i
