@@ -40,3 +40,20 @@ public class Solution {
         return min;
     }
 }
+
+TLE 解法， 深度优先搜索：
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        return dfs(triangle, 0, 0);
+    }
+    private int dfs(List<List<Integer>> triangle, int x, int y){
+        
+        if(x == triangle.size()){
+            return 0;
+        }
+        
+        int left = dfs(triangle, x + 1, y);
+        int right = dfs(triangle, x + 1, y + 1);
+        return Math.min(left, right) + triangle.get(x).get(y);
+    }
+}
