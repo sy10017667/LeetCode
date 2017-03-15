@@ -1,0 +1,57 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+
+        //row
+        for (int i = 0; i < 9; i++){
+            boolean[] visited = new boolean[10];
+            for (int j = 0; j < 9; j++){
+                if (check(visited, board[i][j]) == false){
+                    return false;
+                }
+            }
+        }
+        //column
+        for (int j = 0; j < 9; j++){
+            boolean[] visited = new boolean[10];
+            for (int i = 0; i < 9; i++){
+                if (check(visited, board[i][j]) == false){
+                    return false;
+                }
+            }
+        }/*     i = 0 j = 0
+                   0  1  2  3  4  5  6  7  8
+         grid     00 01 02 10 11 12 20 21 22
+                  
+        */
+        for (int i = 0; i < 9; i+=3){
+            for (int j = 0; j < 9; j+=3){
+                boolean[] visited = new boolean[10];
+                for (int k = 0; k < 9; k++){
+                    if (check(visited, board[i+k/3][j+k%3]) == false){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+        
+    }
+    private boolean check(boolean[] visited, char c){
+        if (c == '.'){
+            return true;
+        }
+        int num = c - '0';
+        if (num < 1 || num > 9){
+            return false;
+        }
+        if (visited[num] == true){
+            return false;
+        }
+        visited[num] = true;
+        return true;
+        
+    }
+}
+这个就是循环遍历。对于每一行建一个boolean数组，如果有重复就返回false，对于每一列也是一样。比较不好想的地方就是检查每一个grid的时候
+                    if (check(visited, board[i+k/3][j+k%3]) == false)
+                 用这样一行代码写出来。
