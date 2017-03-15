@@ -1,0 +1,25 @@
+public class Solution {
+    public int integerReplacement(int n) {
+        if (n == Integer.MAX_VALUE) return 32;
+        int count = 0;
+        while (n > 1) {
+            if ((n & 1) == 0) {
+                n >>= 1;
+            } else if (n == 3 || ((n >> 1) & 1) == 0){
+                n--;
+            }else{
+                n++;
+            }
+            count++;
+        }
+        return count;
+    }
+}
+如果结尾是
+0000
+0010
+说明是偶数，可以被2整除，所以向右移位就可以。
+如果结尾是
+0001 则减1
+0011 则加1因为加1可以使得1的个数变少
+如果是3的话，特殊情况，需要减1.
