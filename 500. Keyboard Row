@@ -1,0 +1,29 @@
+public class Solution {
+    public String[] findWords(String[] words) {
+        String[] strs = {"QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"};
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < strs.length; i++){
+            for(char c: strs[i].toCharArray()){
+                map.put(c,i);     //[Q->1,W->1,E->1,R->1... A->2,S->2,D->2....Z->3,X->3,C->3...]
+            }
+        }
+        
+        List<String> res = new LinkedList<>();
+        for (String w: words){
+            if (w == "") continue;
+            int index = map.get(w.toUpperCase().charAt(0)); // 1 or 2 or 3
+            for (char c: w.toUpperCase().toCharArray()){
+                if (map.get(c) != index){
+                    index = -1;
+                    break;
+                }
+            }
+            if (index != -1) res.add(w);
+        }
+        return res.toArray(new String[0]);
+    }
+}
+题目的意思就是给定一个字符串数组，返回其中 单词都在键盘一行里的单词并且返回。
+思路就是先建一个哈希表，把每一个qwertyuiop 对应值为1，asdfghjkl对应值为2，zxcvbnm对应值为3.
+饭后遍历单词数组，对于每一个单词，先看第一个字母，定所属的排数，如果后面的字母全部属于这个排数里，就添加到res里。如果不属于就放弃。
+返回结果的时候就把res变成【】，担心res里面没有值，就初始化为new String[0]。
