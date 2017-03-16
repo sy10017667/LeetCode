@@ -1,0 +1,56 @@
+public class TwoSum {
+    List<Integer> list = new ArrayList<>();
+    HashMap<Integer, Integer> map = new HashMap<>();
+    
+    public void add(int number) {
+        map.put(number, map.getOrDefault(number, 0) + 1);
+        list.add(number);
+    }
+    
+    public boolean find(int target) {
+        for (int i = 0; i < list.size(); i++){
+            int num1 = list.get(i), num2 = target - list.get(i);
+            
+            if (num1 == num2) {
+                if(map.get(num1) > 1) return true;
+            }
+            else {
+                if(map.containsKey(num2)) return true;
+            }
+        }
+        return false;
+        
+    }
+}
+/*
+
+TLE
+
+public class TwoSum {
+    List<Integer> list = new ArrayList<>();
+    
+    public void add(int number) {
+        list.add(number);
+    }
+
+    public boolean find(int target) {
+        int[] nums = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            nums[i] = list.get(i);
+        }
+        
+        Arrays.sort(nums);
+        int l = 0, r = nums.length - 1;
+        while (l < r){
+            if (nums[l] + nums[r] == target){
+                return true;
+            }else if (nums[l] + nums[r] < target){
+                l++;
+            }else{
+                r--;
+            }
+        }
+        return false;
+    }
+}
+*/
